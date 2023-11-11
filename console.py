@@ -161,15 +161,15 @@ class HBNBCommand(cmd.Cmd):
         Display string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
 
-        new_argument = parse(arg)
-        if len(new_argument) > 0 and new_argument[0] not in HBNBCommand.Classes:
+        arg1 = parse(arg)
+        if len(arg1) > 0 and arg1[0] not in HBNBCommand.Classes:
             print("** class doesn't exist **")
         else:
             objects_list = []
             for object in storage.all().values():
-                if len(new_argument) > 0 and new_argument[0] == object.__class__.__name__:
+                if len(arg1) > 0 and arg1[0] == object.__class__.__name__:
                     objects_list.append(object.__str__())
-                elif len(new_argument) == 0:
+                elif len(arg1) == 0:
                     objects_list.append(object.__str__())
             print(objects_list)
 
@@ -191,43 +191,43 @@ class HBNBCommand(cmd.Cmd):
         Update a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
 
-        new_argument = parse(arg)
+        arg1 = parse(arg)
         objects_dictonary = storage.all()
 
-        if len(new_argument) == 0:
+        if len(arg1) == 0:
             print("** class name missing **")
             return False
-        if new_argument[0] not in HBNBCommand.Classes:
+        if arg1[0] not in HBNBCommand.Classes:
             print("** class doesn't exist **")
             return False
-        if len(new_argument) == 1:
+        if len(arg1) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(new_argument[0], new_argument[1]) not in objects_dictonary.keys():
+        if "{}.{}".format(arg1[0], arg1[1]) not in objects_dictonary.keys():
             print("** no instance found **")
             return False
-        if len(new_argument) == 2:
+        if len(arg1) == 2:
             print("** attribute name missing **")
             return False
-        if len(new_argument) == 3:
+        if len(arg1) == 3:
             try:
-                type(eval(new_argument[2])) != dict
+                type(eval(arg1[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
 
-        if len(new_argument) == 4:
+        if len(arg1) == 4:
             obj = objects_dictonary["{}.{}".format(
-                new_argument[0], new_argument[1])]
-            if new_argument[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[new_argument[2]])
-                obj.__dict__[new_argument[2]] = valtype(new_argument[3])
+                arg1[0], arg1[1])]
+            if arg1[2] in obj.__class__.__dict__.keys():
+                valtype = type(obj.__class__.__dict__[arg1[2]])
+                obj.__dict__[arg1[2]] = valtype(arg1[3])
             else:
-                obj.__dict__[new_argument[2]] = new_argument[3]
-        elif type(eval(new_argument[2])) == dict:
+                obj.__dict__[arg1[2]] = arg1[3]
+        elif type(eval(arg1[2])) == dict:
             obj = objects_dictonary["{}.{}".format(
-                new_argument[0], new_argument[1])]
-            for k, v in eval(new_argument[2]).items():
+                arg1[0], arg1[1])]
+            for k, v in eval(arg1[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in {str, int, float}):
                     valtype = type(obj.__class__.__dict__[k])
