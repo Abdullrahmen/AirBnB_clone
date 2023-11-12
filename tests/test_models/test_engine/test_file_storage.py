@@ -6,6 +6,7 @@ Contains the TestFileStorage classes
 from datetime import datetime
 import inspect
 import models
+from models.engine import file_storage
 from models.engine.file_storage import FileStorage
 from models.amenity import Amenity
 from models.base_model import BaseModel
