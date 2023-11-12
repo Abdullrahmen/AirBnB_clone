@@ -18,11 +18,12 @@ class FileStorage:
 
     def new(self, obj):
         """Add a new object"""
-        FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        if obj is not None:
+            FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
         """Save all objects to a json file"""
-        ob = self.__objects.copy()
+        ob = {}
         for k in self.__objects:
             ob[k] = self.__objects[k].to_dict()
         with open(FileStorage.__file_path, "w") as f:
