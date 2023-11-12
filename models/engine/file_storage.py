@@ -3,7 +3,6 @@
 and deserializes JSON file to instances"""
 
 import json
-import models
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
