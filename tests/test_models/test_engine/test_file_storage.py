@@ -20,6 +20,7 @@ import unittest
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
+
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     def test_all_returns_dict(self):
